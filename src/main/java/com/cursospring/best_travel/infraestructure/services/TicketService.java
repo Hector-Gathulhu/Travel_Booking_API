@@ -32,7 +32,6 @@ public class TicketService implements ITicketService {
     private final TicketRepository ticketRepository;
 
 
-
     @Override
     public TicketResponse create(TicketRequest request) {
 
@@ -50,7 +49,7 @@ public class TicketService implements ITicketService {
 
         var ticketPersisted = this.ticketRepository.save(ticketToPersist);
 
-        log.info("Ticket saved eith ID: {}",ticketPersisted.getId());
+        log.info("Ticket saved eith ID: {}", ticketPersisted.getId());
         return this.entityToResponse(ticketPersisted);
     }
 
@@ -69,9 +68,9 @@ public class TicketService implements ITicketService {
 
     }
 
-    private TicketResponse entityToResponse(TicketEntity entity){
+    private TicketResponse entityToResponse(TicketEntity entity) {
         var response = new TicketResponse();
-        BeanUtils.copyProperties(entity,response);
+        BeanUtils.copyProperties(entity, response);
         var flyResponse = new FlyResponse();
         BeanUtils.copyProperties(entity.getFly(), flyResponse);
         response.setFly(flyResponse);

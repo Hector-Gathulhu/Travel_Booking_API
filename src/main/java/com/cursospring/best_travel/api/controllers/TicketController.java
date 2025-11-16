@@ -8,15 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="ticket")
+@RequestMapping(path = "ticket")
 @AllArgsConstructor
 public class TicketController {
 
     private final ITicketService ticketService;
 
     @PostMapping
-    public ResponseEntity<TicketResponse> post(@RequestBody TicketRequest request){
-    return ResponseEntity.ok(ticketService.create(request));
+    public ResponseEntity<TicketResponse> post(@RequestBody TicketRequest request) {
+        return ResponseEntity.ok(ticketService.create(request));
     }
 
 
