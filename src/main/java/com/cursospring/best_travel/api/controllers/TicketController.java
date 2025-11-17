@@ -18,6 +18,4 @@ public class TicketController {
     public ResponseEntity<TicketResponse> post(@RequestBody TicketRequest request) {
         return ResponseEntity.ok(ticketService.create(request));
     }
-
-
 }
