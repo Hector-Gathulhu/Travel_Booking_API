@@ -39,6 +39,7 @@ public class TicketService implements ITicketService {
         var customer = customerRepository.findById(request.getIdClient()).orElseThrow();
 
         var ticketToPersist = TicketEntity.builder()
+                .id(UUID.randomUUID())
                 .fly(fly)
                 .customer(customer)
                 .price(fly.getPrice().multiply(BigDecimal.valueOf(0.25)))
