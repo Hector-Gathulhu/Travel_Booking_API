@@ -1,10 +1,8 @@
 package com.cursospring.best_travel.infraestructure.services;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import com.cursospring.best_travel.api.models.request.TicketRequest;
 import com.cursospring.best_travel.api.models.responses.FlyResponse;
 import com.cursospring.best_travel.api.models.responses.TicketResponse;
-import com.cursospring.best_travel.domain.entities.FlyEntity;
 import com.cursospring.best_travel.domain.entities.TicketEntity;
 import com.cursospring.best_travel.domain.repositories.CustomerRepository;
 import com.cursospring.best_travel.domain.repositories.FlyRepository;
@@ -55,8 +53,10 @@ public class TicketService implements ITicketService {
     }
 
     @Override
-    public TicketResponse read(UUID uuid) {
-        return null;
+    public TicketResponse read(UUID id) {
+
+        var ticketFromDB = this.ticketRepository.findById(id).orElseThrow();
+        return this.entityToResponse(ticketFromDB);
     }
 
     @Override
