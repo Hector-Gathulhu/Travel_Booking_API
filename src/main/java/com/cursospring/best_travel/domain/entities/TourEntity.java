@@ -11,7 +11,8 @@ import java.util.UUID;
 @Entity(name = "tour")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 public class TourEntity {
 

@@ -41,7 +41,7 @@ public class TicketService implements ITicketService {
                 .id(UUID.randomUUID())
                 .fly(fly)
                 .customer(customer)
-                .price(fly.getPrice().add(fly.getPrice().multiply(charger_price_percentage)))
+                .price(fly.getPrice().add(fly.getPrice().multiply(charges_price_percentage)))
                 .purchaseDate(LocalDate.now())
                 .arrivalDate(BestTravelUtil.getRandomLatter())
                 .departureDate(BestTravelUtil.getRandomSoon())
@@ -67,13 +67,13 @@ public class TicketService implements ITicketService {
         var fly = this.flyRepository.findById(request.getIdFly()).orElseThrow();
 
         ticketToUpdate.setFly(fly);
-        ticketToUpdate.setPrice(fly.getPrice().add(fly.getPrice().multiply(charger_price_percentage)));
+        ticketToUpdate.setPrice(fly.getPrice().add(fly.getPrice().multiply(charges_price_percentage)));
         ticketToUpdate.setDepartureDate(BestTravelUtil.getRandomSoon());
         ticketToUpdate.setArrivalDate(BestTravelUtil.getRandomLatter());
 
         var ticketUpdated = this.ticketRepository.save(ticketToUpdate);
 
-        log.info("Ticket updated with id:", ticketUpdated.getId());
+        log.info("Ticket updated with id: {}", ticketUpdated.getId());
 
         return this.entityToResponse(ticketUpdated);
     }
@@ -89,7 +89,7 @@ public class TicketService implements ITicketService {
     public BigDecimal findPrice(Long flyId) {
 
         var fly = flyRepository.findById(flyId).orElseThrow();
-        return fly.getPrice().add(fly.getPrice().multiply(charger_price_percentage));
+        return fly.getPrice().add(fly.getPrice().multiply(charges_price_percentage));
     }
 
     private TicketResponse entityToResponse(TicketEntity entity) {
@@ -101,7 +101,7 @@ public class TicketService implements ITicketService {
         return response;
     }
 
-    private static final BigDecimal charger_price_percentage = BigDecimal.valueOf(0.25);
+    private static final BigDecimal charges_price_percentage = BigDecimal.valueOf(0.25);
 
 
 }
